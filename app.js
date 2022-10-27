@@ -18,7 +18,7 @@ import { Database } from "./ConfigDb/configDb";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const port = 3001;
+const port = process.env.PORT;
 const app = express();
 
 
@@ -60,8 +60,8 @@ app.use('/api/comments', CommentRouter);
 
 const db= new Database()
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.listen(port||3001, () => {
+    console.log(`Example app listening on port ${port||3001}`);
     db.Connect().then((err,result)=>{
       if(err) throw err;
       console.log('Database is connected !')
