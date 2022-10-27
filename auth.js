@@ -2,7 +2,7 @@ import express from "express";
 const AuthRouter = express.Router();
 import passport from "passport";
 import './facebook'
-const CLIENT_URL = "http://localhost:3000/";
+const CLIENT_URL = "https://film-pinklink.herokuapp.com/";
 
 AuthRouter.get("/login/success", (req, res) => {
   if (req.user) {
