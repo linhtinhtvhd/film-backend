@@ -14,17 +14,19 @@ passport.use(new Strategy({
   },
   function(accessToken, refreshToken, profile, done) {
     done(null,profile)
-  // model.findById(profile.id).then(data=>{
-  //   if(data.length>0){
-  //     const token = model.generateAccessTokenId(profile.id)
-  //     done(null,{token:token,profile:data})
-  //   }else{
-  //     model.FindAndUpdate(profile).then(data=>{
-  //       const token = model.generateAccessTokenId(profile.id)
-  //           done(null,{token:token,profile:data})
-  //     })
-  //   }
-  // })
+  model.findById(profile.id).then(data=>{
+    if(data.length>0){
+      const token = model.generateAccessTokenId(profile.id)
+      localStorage.setItem("token",JSON.stringify(token))
+      done(null,{token:token,profile:data})
+    }else{
+      model.FindAndUpdate(profile).then(data=>{
+        const token = model.generateAccessTokenId(profile.id)
+        localStorage.setItem("token",JSON.stringify(token))
+            done(null,{token:token,profile:data})
+      })
+    }
+  })
     })
   
 )
