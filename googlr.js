@@ -17,12 +17,12 @@ passport.use(new Strategy({
   model.findById(profile.id).then(data=>{
     if(data.length>0){
       const token = model.generateAccessTokenId(profile.id)
-      localStorage.setItem('token', JSON.stringify(token));
+      localStorage.setItem('token', token);
       done(null,{token:token,profile:data})
     }else{
       model.FindAndUpdate(profile).then(data=>{
         const token = model.generateAccessTokenId(profile.id)
-        localStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('token', token);
             done(null,{token:token,profile:data})
       })
     }
