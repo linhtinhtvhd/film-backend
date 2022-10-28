@@ -30,31 +30,20 @@ app.use(session({
 }));
 app.use(morgan("dev"));
 const whiteList = ['http://localhost:3000','https://film-linhtinhtvhd.vercel.app']
-const corsOptions = {
-  credentials:true,
-  origin: (origin,callback)=>{
-    if(whiteList.includes(origin))
-    {
-      return callback(null,true)
-    }
-    else{
-      callback(new Error('Not allowed by cors'))
-    }
-  }
-}
 
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
 app.use(cors())
 
-// app.use(function(req, res, next) {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-//   next();
-// });
+
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(express.json({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(passport.initialize());
