@@ -28,11 +28,19 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }));
-app.use(cors({origin:"*",
-methods:["GET", "POST", "OPTIONS", "PUT", "DELETE"],
-credentials:true}))
 app.use(morgan("dev"));
+const whitelist = ['http://localhost:3000', 'http://localhost:3001'];
+const corsOptions = {
+  credentials: true, // This is important.
+  origin: (origin, callback) => {
+    if(whitelist.includes(origin))
+      return callback(null, true)
 
+      callback(new Error('Not allowed by CORS'));
+  }
+}
+
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(express.json({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(passport.initialize());
