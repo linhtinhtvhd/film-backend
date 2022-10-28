@@ -20,8 +20,18 @@ UserRouter.post("/findByUsername",authenticationToken, (req, res) => {
     })
 }
 )
+UserRouter.get("/findById", (req, res) => {
+    const id =  req.user.user.id
+console.log(id)
+    model.findById(id)
+    .then(data=>{
+        res.json(data)
+    })
+}
+)
+
 UserRouter.post("/findById",authenticationTokenId, (req, res) => {
-    const id = req.id
+    const id = req.id || req.user.user.id
 console.log(id)
     model.findById(id)
     .then(data=>{
