@@ -28,7 +28,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }));
-app.use(cors())
+app.use(cors({origin:"*"}))
 app.use(morgan("dev"));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", req.header('Origin'));
