@@ -23,21 +23,23 @@ const app = express();
 
 // app.use(cors())
 
-// app.use(function(req, res, next) {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept","X-Auth-Token","Authorization"
-//   );
-//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-//   next();
-// });
-app.all ('/', function (req, res, next) {
-  res.header ("Access-Control-Allow-Origin", "*");
-  res.header ("Access-Control-Allow-Headers", "X-Request-With");
-  next()
+app.all(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept","X-Auth-Token","Authorization"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
 });
+// app.all ('/', function (req, res, next) {
+//   res.header ("Access-Control-Allow-Origin", "*");
+//   res.header ("Access-Control-Allow-Headers", "X-Request-With");
+//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+//   res.setHeader("Access-Control-Allow-Credentials", true);
+//   next()
+// });
 
 app.use(session({
   secret: 'somethingsecretgoeshere',
