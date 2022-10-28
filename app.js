@@ -34,12 +34,12 @@ app.use(cors({origin:"*"}))
 //   next();
 // });
 
-// app.use(session({
-//   secret: 'somethingsecretgoeshere',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: false }
-// }));
+app.use(session({
+  secret: 'somethingsecretgoeshere',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 app.use(morgan("dev"));
 
 
