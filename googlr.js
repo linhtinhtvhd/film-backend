@@ -9,7 +9,8 @@ const clienSecret ="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"
 passport.use(new Strategy({
     clientID: clienId,
     clientSecret: clienSecret,
-    callbackURL: "https://film-pinklink.herokuapp.com/auth/google/callback"
+    callbackURL: "https://film-pinklink.herokuapp.com/auth/google/callback",
+    proxy:true
   },
   function(accessToken, refreshToken, profile, done) {
   model.findById(profile.id).then(data=>{
