@@ -40,7 +40,7 @@ app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-app.use(cors({credentials: true, origin: 'https://film-linhtinhtvhd.vercel.app/'}))
+app.use(cors({credentials: true, origin: '*'}))
 
 
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
