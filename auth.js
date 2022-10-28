@@ -2,6 +2,8 @@ import express from "express";
 const AuthRouter = express.Router();
 import passport from "passport";
 import './facebook'
+import UserModel from "./DAL/models/userModel";
+const model = new UserModel();
 const CLIENT_URL = "https://film-linhtinhtvhd.vercel.app";
 
 AuthRouter.get("/login/success", (req, res) => {
@@ -14,7 +16,15 @@ AuthRouter.get("/login/success", (req, res) => {
     });
   }
 });
-
+AuthRouter.get("/findById", (req, res) => {
+  const id =  req.user.user.id
+console.log(id)
+  model.findById(id)
+  .then(data=>{
+      res.json(data)
+  })
+}
+)
 AuthRouter.get("/login/failed", (req, res) => {
   res.status(401).json({
     success: false,
