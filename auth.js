@@ -2,7 +2,7 @@ import express from "express";
 const AuthRouter = express.Router();
 import passport from "passport";
 import './facebook'
-const CLIENT_URL = "https://film-9jz38tyq2-linhtinhtvhd.vercel.app/";
+const CLIENT_URL = "https://film-linhtinhtvhd.vercel.app";
 
 AuthRouter.get("/login/success", (req, res) => {
   if (req.user) {
