@@ -10,10 +10,10 @@ passport.use(new Strategy({
     clientID: clienId,
     clientSecret: clienSecret,
     callbackURL: "/auth/google/callback",
-    proxy:true
+ 
   },
   function(accessToken, refreshToken, profile, done) {
-    done(null,profile)
+   
   model.findById(profile.id).then(data=>{
     if(data.length>0){
       const token = model.generateAccessTokenId(profile.id)

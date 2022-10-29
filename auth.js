@@ -4,7 +4,7 @@ import passport from "passport";
 import './facebook'
 import UserModel from "./DAL/models/userModel";
 const model = new UserModel();
-const CLIENT_URL = "https://film-linhtinhtvhd.vercel.app";
+const CLIENT_URL = "http://localhost:3000/";
 
 AuthRouter.get("/login/success", (req, res) => {
   if (req.user) {
