@@ -21,11 +21,9 @@ const __dirname = path.dirname(__filename);
 const port = process.env.PORT;
 const app = express();
 
-app.use(cors({origin:"*",
-credentials:true,
-}))
+app.use(cors())
 
-app.all(function(req, res, next) {
+app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader(
