@@ -2,9 +2,8 @@ import express from "express";
 const AuthRouter = express.Router();
 import passport from "passport";
 import './facebook'
-import UserModel from "./DAL/models/userModel";
-const model = new UserModel();
-const CLIENT_URL = "http://localhost:3000/";
+
+const CLIENT_URL = "https://film-linhtinhtvhd.vercel.app";
 
 AuthRouter.get("/login/success", (req, res) => {
   if (req.user) {

@@ -54,6 +54,8 @@ UserRouter.post('/create',(req,res)=>{
 UserRouter.put('/update',authenticationToken,(req,res)=>{
     const updateUser = req.body
     const username= req.username
+   
+ 
     model.updateUser(updateUser,username).then(data=>{
         
          res.json(data)
@@ -62,6 +64,8 @@ UserRouter.put('/update',authenticationToken,(req,res)=>{
 UserRouter.put('/updateId',authenticationToken,(req,res)=>{
     const updateUser = req.body
     const id= req.id
+    console.log(updateUser)
+    console.log(req.id)
     model.updateUserId(updateUser,id).then(data=>{
         
          res.json(data)
