@@ -1,6 +1,6 @@
 import  express  from "express";
 import authenticationToken from "../Authentication/authentication";
-import authenticationTokenId from "../Authentication/authentication";
+
 import UserModel from "../DAL/models/userModel";
 
 const UserRouter = express.Router();
