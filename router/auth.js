@@ -23,9 +23,13 @@ AuthRouter.get("/login/failed", (req, res) => {
   });
 });
 
-AuthRouter.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect(CLIENT_URL);
+AuthRouter.get('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) { 
+      return next(err); 
+      }
+    res.redirect('/');
+  });
 });
 
 AuthRouter.get(
