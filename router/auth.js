@@ -1,7 +1,7 @@
 import express from "express";
 const AuthRouter = express.Router();
 import passport from "passport";
-import './facebook'
+import '../passport/facebook'
 
 const CLIENT_URL = "http://localhost:3000";
 

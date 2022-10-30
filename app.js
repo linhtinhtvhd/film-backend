@@ -6,11 +6,11 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import morgan from 'morgan'
 import cors from 'cors'
-import './googlr.js'
+import './passport/googlr'
 import passport from "passport";
 import UserRouter from "./router/user";
 import CommentRouter from "./router/comment";
-import AuthRouter from './auth'
+import AuthRouter from './router/auth'
 
 
 import { Database } from "./ConfigDb/configDb";
