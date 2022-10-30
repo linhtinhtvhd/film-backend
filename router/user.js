@@ -22,7 +22,7 @@ UserRouter.post("/findByUsername",authenticationToken, (req, res) => {
 )
 
 
-UserRouter.post("/findById",authenticationTokenId, (req, res) => {
+UserRouter.post("/findById",authenticationToken, (req, res) => {
     const id = req.id 
 console.log(id)
     model.findById(id)
