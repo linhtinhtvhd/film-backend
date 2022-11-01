@@ -31,12 +31,12 @@ app.use(session({
   cookie: { secure: false}
 }));
 // app.use(cors())
-const corsOptions = {
-  origin:'https://master--jolly-concha-8b8929.netlify.app',
-  credentials:true,
-  optionSuccessStatus:200
-}
-app.use(cors(corsOptions))
+// const corsOptions = {
+//   origin:'https://master--jolly-concha-8b8929.netlify.app',
+//   credentials:true,
+//   optionSuccessStatus:200
+// }
+app.use(cors())
 app.use(morgan("dev"));
 
 // app.use(function(req, res, next) {
