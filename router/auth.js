@@ -16,7 +16,7 @@ AuthRouter.get("/login/success", (req, res) => {
     });
   }
 });
-export const id = req.id
+
 AuthRouter.get("/login/failed", (req, res) => {
   res.status(401).json({
     success: false,
