@@ -28,20 +28,27 @@ app.use(session({
   secret: 'somethingsecretgoeshere',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }
+  cookie: { secure: false}
 }));
-app.use(cors())
+// app.use(cors())
+const corsOptions = {
+  origin:'https://master--jolly-concha-8b8929.netlify.app',
+  credentials:true,
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions))
 app.use(morgan("dev"));
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", req.header('Origin'));
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  next();
-});
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", '*');
+//   res.header("Access-Control-Allow-Credentials", true);
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+//   next();
+// });
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(express.json({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(passport.initialize());
