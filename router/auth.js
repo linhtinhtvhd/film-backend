@@ -3,12 +3,12 @@ const AuthRouter = express.Router();
 import passport from "passport";
 import '../passport/facebook'
 
-const CLIENT_URL = "https://master--jolly-concha-8b8929.netlify.app";
+const CLIENT_URL = "http://localhost:3000";
 
 AuthRouter.get("/login/success", (req, res) => {
   
   if (req.user) {
-    res.status(200).json({
+    res.json({
       success: true,
       message: "successfull",
       user: req.user,
@@ -16,7 +16,7 @@ AuthRouter.get("/login/success", (req, res) => {
     });
   }
 });
-
+export const id = req.id
 AuthRouter.get("/login/failed", (req, res) => {
   res.status(401).json({
     success: false,
