@@ -16,7 +16,7 @@ class UserModel{
         return query.exec();
     }
     findByUsername(username) {
-      const query = this.model.find({username:username})
+      const query = this.model.find({username:username}).limit(1)
       return query.exec();
     }
     findById(id) {
