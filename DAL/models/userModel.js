@@ -1,8 +1,26 @@
 import mongoose from "mongoose";
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs'
 
 import { UserSchema } from "../schemas/userSchema";
 
+UserSchema.pre('save',async function(next){
+  try {
+    const salt = await bcrypt.genSalt(10)
+    const passwordHashed = await bcrypt.hash(this.password,salt)
+    this.password=passwordHashed
+    next()
+  } catch (error) {
+    next(error)
+  }
+})
+UserSchema.method.isValidPassword = async function(newPassword){
+ try {
+  return await bcrypt.compare(newPassword,this.password)
+ } catch (error) {
+  throw new Error(error)
+ }
+}
 class UserModel{
     constructor(){
         this.model = mongoose.model("user",UserSchema)
@@ -12,8 +30,9 @@ class UserModel{
         return query.exec();
     }
     findByUserNameandPassword(username,password){
-        const query = this.model.find({username:username,password:password}).limit(1)
-        return query.exec();
+        const query = this.model.find({username:username}).limit(1)
+        const isCorrectPassword = this.isValidPassword(password,this.password)
+         if(isCorrectPassword){return query.exec()}
     }
     findByUsername(username) {
       const query = this.model.find({username:username}).limit(1)
