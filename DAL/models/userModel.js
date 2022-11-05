@@ -31,8 +31,9 @@ class UserModel{
     }
     findByUserNameandPassword(username,password){
         const query = this.model.find({username:username}).limit(1)
-        const isCorrectPassword = this.isValidPassword(password,this.password)
-         if(isCorrectPassword){return query.exec()}
+        const isCorrectPassword = await this.isValidPassword(password,this.password)
+         if(isCorrectPassword)
+         {return query.exec()}
     }
     findByUsername(username) {
       const query = this.model.find({username:username}).limit(1)
