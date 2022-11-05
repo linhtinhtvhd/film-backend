@@ -14,16 +14,17 @@ UserSchema.pre('save',async function(next){
     next(error)
   }
 })
-UserSchema.method.isValidPassword = async function(newPassword){
+UserSchema.methods.isValidPassword = async function(newPassword){
  try {
   return await bcrypt.compare(newPassword,this.password)
  } catch (error) {
-  throw new Error(error)
+
  }
 }
 class UserModel{
     constructor(){
         this.model = mongoose.model("user",UserSchema)
+
     }
     getAll(){
         const query = this.model.find();
@@ -31,9 +32,10 @@ class UserModel{
     }
     findByUserNameandPassword(username,password){
         const query = this.model.find({username:username}).limit(1)
-        const isCorrectPassword = await this.isValidPassword(password,this.password)
-         if(isCorrectPassword)
-         {return query.exec()}
+        console.log(query.schema.methods)
+        const isCorrectPassword =  query.schema.methods.isValidPassword(password,this.password)
+        if(isCorrectPassword)
+        {return query.exec()}
     }
     findByUsername(username) {
       const query = this.model.find({username:username}).limit(1)
