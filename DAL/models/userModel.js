@@ -11,7 +11,7 @@ UserSchema.pre('save',async function(next){
     this.password=passwordHashed
     next()
   } catch (error) {
-    next(error)
+    
   }
 })
 UserSchema.methods.isValidPassword = async function(newPassword){
@@ -72,10 +72,12 @@ UserModel.prototype.createNewUser = async function (user) {
     const fullname=update.fullname
     const listfilm=update.listfilm
     const avatar=update.avatar
-  
+    const salt = await bcrypt.genSalt(10)
+    const passwordHashed = await bcrypt.hash(password,salt)
+    
     const query = {username:username}
     var updateUser = {
-      password:password,
+      password:passwordHashed,
       fullname:fullname,
       avatar:avatar,
       listfilm:listfilm
