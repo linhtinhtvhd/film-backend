@@ -36,7 +36,7 @@ app.use(session({
 //   credentials:true,
 //   optionSuccessStatus:200
 // }
-// app.use(cors())
+app.use(cors())
 app.use(morgan("dev"));
 
 app.use(function(req, res, next) {
