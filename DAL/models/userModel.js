@@ -4,23 +4,14 @@ import bcrypt from 'bcryptjs'
 
 import { UserSchema } from "../schemas/userSchema";
 
-UserSchema.pre('save',async function(next){
-  try {
-    const salt = await bcrypt.genSalt(10)
-    const passwordHashed = await bcrypt.hash(this.password,salt)
-    this.password=passwordHashed
-    next()
-  } catch (error) {
-    
-  }
-})
-UserSchema.methods.isValidPassword = async function(newPassword){
- try {
-  return await bcrypt.compare(newPassword,this.password)
- } catch (error) {
 
- }
-}
+// UserSchema.methods.isValidPassword = async function(newPassword){
+//  try {
+//   return await bcrypt.compare(newPassword,this.password)
+//  } catch (error) {
+
+//  }
+// }
 class UserModel{
     constructor(){
         this.model = mongoose.model("user",UserSchema)
@@ -32,10 +23,8 @@ class UserModel{
     }
     findByUserNameandPassword(username,password){
         const query = this.model.find({username:username}).limit(1)
-        console.log(query.schema.methods)
-        const isCorrectPassword =  query.schema.methods.isValidPassword(password,this.password)
-        if(isCorrectPassword)
-        {return query.exec()}
+    
+        return query.exec()
     }
     findByUsername(username) {
       const query = this.model.find({username:username}).limit(1)
@@ -72,12 +61,12 @@ UserModel.prototype.createNewUser = async function (user) {
     const fullname=update.fullname
     const listfilm=update.listfilm
     const avatar=update.avatar
-    const salt = await bcrypt.genSalt(10)
-    const passwordHashed = await bcrypt.hash(password,salt)
+    // const salt = await bcrypt.genSalt(10)
+    // const passwordHashed = await (await bcrypt.hash(password,salt)).toString()
     
     const query = {username:username}
     var updateUser = {
-      password:passwordHashed,
+      password:password,
       fullname:fullname,
       avatar:avatar,
       listfilm:listfilm

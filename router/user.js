@@ -1,6 +1,6 @@
 import  express  from "express";
 import authenticationToken from "../Authentication/authentication";
-
+import bcrypt from 'bcryptjs'
 import UserModel from "../DAL/models/userModel";
 
 const UserRouter = express.Router();
@@ -31,14 +31,22 @@ console.log(id)
     })
 }
 )
-UserRouter.post("/login",(req,res)=>{
+UserRouter.post("/login",(req,res)=> {
     const user = req.body
     const {username,password}=user
     model.findByUserNameandPassword(username,password).then(data=>{
         if(data.length>0){
-            const token = model.generateAccessToken(username)
-            res.json({exsted:true,token:token})
+            const isValidPassword = async (newPassword) =>  { return  await bcrypt.compare(newPassword.toString(),data[0].password)}
+               
+         
+            isValidPassword(password).then(data=>{
+                if(data){const token = model.generateAccessToken(username)
+                    res.json({exsted:true,token:token})}
+            })
+           
         }
+        
+        
         else{
             res.status(500).send({message: 'Login failed'})
         }

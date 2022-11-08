@@ -30,22 +30,22 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false}
 }));
-// app.use(cors())
-const corsOptions = {
-  origin:'http://localhost:3000',
-  credentials:true,
-  optionSuccessStatus:200
-}
-app.use(cors(corsOptions))
+app.use(cors())
+// const corsOptions = {
+//   origin:'http://localhost:3000',
+//   credentials:true,
+//   optionSuccessStatus:200
+// }
+// app.use(cors(corsOptions))
 app.use(morgan("dev"));
 
-app.use("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*")
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Max-Age", "1800");
-  res.setHeader("Access-Control-Allow-Headers", "content-type");
-  res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
-   });
+// app.use("/", (req, res) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*")
+//   res.setHeader("Access-Control-Allow-Credentials", "true");
+//   res.setHeader("Access-Control-Max-Age", "1800");
+//   res.setHeader("Access-Control-Allow-Headers", "content-type");
+//   res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" ); 
+//    });
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(express.json({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(passport.initialize());
